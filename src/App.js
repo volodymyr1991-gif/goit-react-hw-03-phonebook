@@ -18,34 +18,48 @@ export default class App extends Component {
     filter: "",
   };
 
+  componentDidMount() {
+    console.log("componentDidMount  ");
+    const persistedTasks = localStorage.getItem("tasks");
+
+    if (persistedTasks) {
+      this.setState({
+        tasks: JSON.parse(persistedTasks),
+      });
+    }
+  }
+
+  componentDidUpdate(prevState) {
+    console.log("componentDidUpdate", prevState);
+    if (prevState.tasks !== this.state.tasks) {
+      localStorage.setItem("tasks", JSON.stringify(this.state.tasks));
+    }
+  }
+
   changeFilter = (filter) => {
     console.log(filter);
     this.setState({ filter });
   };
 
   addtask = (task) => {
-    const semName = this.state.tasks.map(task=>task.name).includes(task.name)
-if(semName){
-  alert(`${task.name} is already in contacts`)
-}else{
- 
-  const contact = {
-    id: uuidv4(),
-    ...task,
-  }; 
+    const semName = this.state.tasks
+      .map((task) => task.name)
+      .includes(task.name);
+    if (semName) {
+      alert(`${task.name} is already in contacts`);
+    } else {
+      const contact = {
+        id: uuidv4(),
+        ...task,
+      };
 
-  this.setState((prevstate) => {
-    return {
-      tasks: [...prevstate.tasks, contact],
-    };
-  });
-};
-}
-    
-   
-
-
-    
+      this.setState((prevstate) => {
+        return {
+          tasks: [...prevstate.tasks, contact],
+        };
+      });
+    }
+  };
 
   removeTask = (taskId) => {
     this.setState((prevState) => {
@@ -54,8 +68,6 @@ if(semName){
       };
     });
   };
-
-
 
   getVisibleTasks = () => {
     const { tasks, filter } = this.state;
@@ -72,7 +84,7 @@ if(semName){
     console.log("visibletasc", visibleTasks);
     return (
       <Layout>
-         <h1>Phonebook</h1>
+        <h1>Phonebook</h1>
         <ContactForm onAddTask={this.addtask} />
 
         <h2>Contacts</h2>
@@ -88,4 +100,3 @@ if(semName){
     );
   }
 }
-

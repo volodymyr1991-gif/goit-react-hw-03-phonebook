@@ -1,62 +1,56 @@
 import React, { Component } from "react";
-import './ContactForm.css'
+import "./ContactForm.css";
 
 export default class ContactForm extends Component {
   state = {
     name: "",
-    number:"",
+    number: "",
   };
 
-  
-
-handleChange = (e) =>{
-    const {name,value} = e.target;
+  handleChange = (e) => {
+    const { name, value } = e.target;
     this.setState({
-        [name]:value,
-    })
-}
-
-  
+      [name]: value,
+    });
+  };
 
   handleSubnit = (e) => {
     e.preventDefault();
-   
 
-    
-    this.props.onAddTask({...this.state})
-
+    this.props.onAddTask({ ...this.state });
 
     this.setState({
-    name: "",
-      number:"",
+      name: "",
+      number: "",
     });
   };
 
   render() {
     return (
-      <form className='ContactForm' onSubmit={this.handleSubnit}>
-        <label className='ContactForm-label'>
+      <form className="ContactForm" onSubmit={this.handleSubnit}>
+        <label className="ContactForm-label">
           Name
           <input
-          className='ContactForm-input'
-          name="name"
+            className="ContactForm-input"
+            name="name"
             type="text"
             value={this.state.text}
             onChange={this.handleChange}
           />
         </label>
-        <label className='ContactForm-label'>
+        <label className="ContactForm-label">
           Number
           <input
-          className='ContactForm-input'
-          name="number"
+            className="ContactForm-input"
+            name="number"
             type="phone"
-
             value={this.state.number}
             onChange={this.handleChange}
           />
         </label>
-        <button className='ContactForm-button' type="submit">Add contact</button>
+        <button className="ContactForm-button" type="submit">
+          Add contact
+        </button>
       </form>
     );
   }
