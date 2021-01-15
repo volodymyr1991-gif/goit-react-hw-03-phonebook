@@ -20,7 +20,7 @@ const TaskList = ({ tasks, onRemoveTask }) => (
 );
 
 TaskList.propTypes = {
-  tasks: PropTypes.func.isRequired,
+  tasks: PropTypes.array.isRequired,
   onRemoveTask: PropTypes.func.isRequired
 }
 

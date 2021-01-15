@@ -18,10 +18,10 @@ export default class App extends Component {
     filter: "",
   };
 
-  componentDidMount() {
-    console.log("componentDidMount  ");
+  componentDidMount(prevState) {
+    console.log("componentDidMount tasks ", this.props);
     const persistedTasks = localStorage.getItem("tasks");
-
+this.getVisibleTasks()
     if (persistedTasks) {
       this.setState({
         tasks: JSON.parse(persistedTasks),
@@ -88,10 +88,10 @@ export default class App extends Component {
         <ContactForm onAddTask={this.addtask} />
 
         <h2>Contacts</h2>
-
-        {visibleTasks.length > 1 && (
+        <Filter value={filter} onChangeFilter={this.changeFilter} />
+        {/* {visibleTasks.length > 1 && (
           <Filter value={filter} onChangeFilter={this.changeFilter} />
-        )}
+        )} */}
 
         {visibleTasks.length > 0 && (
           <TaskList tasks={visibleTasks} onRemoveTask={this.removeTask} />

@@ -28,7 +28,7 @@ const TaskListItem = ({number, name, onRemove }) => {
 };
 
 TaskListItem.propTypes={
-  number: PropTypes.number.isRequired,
+  number: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onRemove: PropTypes.func.isRequired
 }

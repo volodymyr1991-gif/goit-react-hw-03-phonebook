@@ -34,7 +34,7 @@ export default class ContactForm extends Component {
             className="ContactForm-input"
             name="name"
             type="text"
-            value={this.state.text}
+            value={this.state.name}
             onChange={this.handleChange}
           />
         </label>
